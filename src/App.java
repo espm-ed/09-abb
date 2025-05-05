@@ -14,14 +14,8 @@ public class App {
         System.out.println("\nimpressão na pós-ordem");
         arvore.posOrdem();
 
-        //System.out.println("\n" + arvore.pesquisar(47));
-
-        arvore.remover(18);
-        arvore.remover(10);
-        arvore.remover(25);
-        arvore.remover(5);
-        System.out.println("\nimpressão na pós-ordem");
-        arvore.preOrdem();
+        // teste --> pesquisar
+        System.out.println(arvore.pesquisar(180));
 
     }
 }

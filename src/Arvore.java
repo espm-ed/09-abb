@@ -59,6 +59,57 @@ public class Arvore<T extends Comparable<T>> {
         posOrdem(ref.getDireita());
         System.out.print(ref.getDado() + "  "); 
     }   
+
+    public boolean pesquisar(T dado) {
+        return pesquisar(raiz, dado) == null ? false : true;
+    }
+
+    private T pesquisar(No<T> ref, T dado) {
+        if(ref == null) {
+            return null;
+        }
+
+        int cmp = dado.compareTo(ref.getDado());
+        if(cmp == 0) {
+            return ref.getDado();
+        }
+        else if(cmp < 0) {
+            return pesquisar(ref.getEsquerda(), dado);
+        }
+        else {
+            return pesquisar(ref.getDireita(), dado);
+        }
+    }
+
+    public void remover(T dado) {
+        remover(raiz, dado);
+    }
+
+    private No<T> remover(No<T> ref, T dado) {
+        int cmp = dado.compareTo(ref.getDado());
+        if(cmp < 0) {
+            ref.setEsquerda(remover(ref.getEsquerda(), dado));
+        }
+        else if(cmp > 0) {
+            ref.setDireita(remover(ref.getDireita(), dado));
+        }
+        else {
+            // aqui acontece a remoção do elemento
+            // caso 1 --> o nó é uma folha
+            if(ref.getDireita() == null && ref.getEsquerda() == null) {
+                return null;
+            }
+            // caso 2 --> o nó tem um filho na deireita
+            if(ref.getEsquerda() == null) {
+                return ref.getDireita();
+            }
+            // caso 2 --> o nó tem um filho na esquerda
+            if(ref.getDireita() == null) {
+                return ref.getEsquerda();
+            }
+        }
+    }
+
 }
 
 
