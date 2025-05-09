@@ -1,4 +1,3 @@
-import org.w3c.dom.Node;
 
 public class Arvore<T extends Comparable<T>> {
     private No<T> raiz;
@@ -99,7 +98,7 @@ public class Arvore<T extends Comparable<T>> {
             if(ref.getDireita() == null && ref.getEsquerda() == null) {
                 return null;
             }
-            // caso 2 --> o nó tem um filho na deireita
+            // caso 2 --> o nó tem um filho na direita
             if(ref.getEsquerda() == null) {
                 return ref.getDireita();
             }
@@ -107,7 +106,21 @@ public class Arvore<T extends Comparable<T>> {
             if(ref.getDireita() == null) {
                 return ref.getEsquerda();
             }
+            else {
+                No<T> menor = localizarMenor(ref.getDireita());
+                ref.setDado(menor.getDado());
+                ref.setDireita(remover(ref.getDireita(), menor.getDado()));
+            }
         }
+        return ref;
+
+    }
+
+    public No<T> localizarMenor(No<T> ref) {
+        while(ref.getEsquerda() != null) {
+            ref = ref.getEsquerda();
+        }
+        return ref;
     }
 
 }
